@@ -1,0 +1,41 @@
+[In]: from pyspark.sql import SparkSession
+[In]: spark=SparkSession.builder.appName('data_processing').getOrCreate()
+[In]: import pyspark.sql.functions as F
+[In]: from pyspark.sql.types import *
+
+
+[In]:schema=StructType().add("user_id","string").add("country","string").add("browser", "string").add("OS",'string').add("age", "integer")
+[In]: df=spark.createDataFrame([("A203",'India',"Chrome","WIN",33),("A201",'China',"Safari","MacOS",35),("A205",'UK',"Mozilla","Linux",25)],schema=schema)
+[In]: df.printSchema()
+df.printSchema()
+
+SparkSession available as 'spark'.
+>>>
+>>>  from pyspark.sql import SparkSession
+  File "<stdin>", line 1
+    from pyspark.sql import SparkSession
+    ^
+IndentationError: unexpected indent
+>>> from pyspark.sql import SparkSession
+>>> spark=SparkSession.builder.appName('data_processing')
+>>> spark=SparkSession.builder.appName('data_processing').getOrCreate()
+>>> import pyspark.sql.functions as F
+>>> from pyspark.sql.types import *
+>>> schema=StructType().add("user_id","string").add("country","string").add("browser", "string").add("OS",'string').add("age", "integer")
+>>> df=spark.createDataFrame([("A203",'India',"Chrome","WIN",33),("A201",'China',"Safari","MacOS",35),("A205",'UK',"Mozilla","Linux",25)],schema=schema)
+>>> df.printSchema()
+root
+ |-- user_id: string (nullable = true)
+ |-- country: string (nullable = true)
+ |-- browser: string (nullable = true)
+ |-- OS: string (nullable = true)
+ |-- age: integer (nullable = true)
+
+>>> df.show()
++-------+-------+-------+-----+---+
+|user_id|country|browser|   OS|age|
++-------+-------+-------+-----+---+
+|   A203|  India| Chrome|  WIN| 33|
+|   A201|  China| Safari|MacOS| 35|
+|   A205|     UK|Mozilla|Linux| 25|
++-------+-------+-------+-----+---+
